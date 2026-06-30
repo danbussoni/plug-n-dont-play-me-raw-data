@@ -1,4 +1,4 @@
-# Plug n dont Play me — Raw Master Data
+# Plug n dont Play me — Raw Master Data (win_default_services_config.map)
 
 An immutable, high-fidelity local Data Lake preserving the absolute factory-default configuration states of Windows 11 services. 
 This repository serves as the centralized backend data pipeline for the **Plug n dont Play me** client application.
@@ -23,7 +23,7 @@ Modern software abuses the PnP philosophy to silently "play" with system privile
 execution lines without explicit user consent.
 
 ## ⚙️ About this repo:
-The application maps the active startup states against the pristine configurations defined in native_base.map.
+The application maps the active startup states against the pristine configurations defined in win_default_services_config.map.
 When implementing a feature to disable non-PPL services—thereby exposing various behaviors of the current PnP stack—it is essential to follow 
 industry best practices to avoid catching users off guard and to mitigate the risk of catastrophic failures. 
 Since there is no persistent record of each service's default state (other than the official installation of a specific Windows 11 version), 
@@ -35,7 +35,7 @@ Source of extraction of this Master Data:
 The production application (PndPm.exe) must ingest the immutable table directly from the public CDN endpoint, 
 using the default service configuration as a baseline for any runtime changes. This data staging component remains cloud-resident, 
 adhering to industry best practices by consuming a validated engineering table from a trusted source:
-https://raw.githubusercontent.com/danbussoni/plug-n-dont-play-me-raw-data/main/native_base.map
+https://raw.githubusercontent.com/danbussoni/plug-n-dont-play-me-raw-data/main/win_default_services_config.map
 
 ## 📊 Native Taxonomy Specification
 
