@@ -14,6 +14,9 @@ Plug and play / pləɡ (ə)n ˈplā
 "[Adjective] denoting or relating to software or devices that are intended to work 
 perfectly when first used or connected, without reconfiguration or adjustment by the user."
 
+"[Substantive] a standard for the connection of peripherals to personal computers, whereby a device only needs to be connected to a 
+computer in order to be configured to work perfectly, without any action by the user."
+
 The Modern Reality: 
 
 In today's computing ecosystem, this hands-off automation has been structurally twisted.
