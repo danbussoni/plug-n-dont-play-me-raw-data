@@ -1,42 +1,48 @@
 # Plug n dont Play me — Raw Master Data
 
-An immutable, high-fidelity local Data Lake preserving the absolute factory-default configuration states of Windows 11 services. This repository serves as the centralized backend data pipeline for the **Plug n dont Play me** client application.
+An immutable, high-fidelity local Data Lake preserving the absolute factory-default configuration states of Windows 11 services. 
+This repository serves as the centralized backend data pipeline for the **Plug n dont Play me** client application.
 
 ## 🎯 Project Philosophy & Modern Paradigm Shift
 
 ### The Legacy Concept: "Plug and Play" (PnP)
 Traditionally, the "Plug and Play" standard revolutionized computing by removing configuration barriers for the end-user:
 
-```text
-;GTRANSLATE LEGACY DEFINITION:
-;Plug and play / pləɡ (ə)n ˈplā
-;[Adjective] denoting or relating to software or devices that are intended to work 
-;perfectly when first used or connected, without reconfiguration or adjustment by the user.
+GTRANSLATE LEGACY DEFINITION:
+Plug and play / pləɡ (ə)n ˈplā
 
-The Modern Reality: Weaponized Automation
-In today's computing ecosystem, this hands-off automation has been structurally twisted. "Working perfectly without user intervention" has devolved into silent background service inflation, unvetted telemetry nodes, aggressive third-party updater daemons, and permanent administrative configuration drift. Modern software abuses the PnP philosophy to silently "play" with system privileges, bloated registries, and background execution lines without explicit user consent.
+"[Adjective] denoting or relating to software or devices that are intended to work 
+perfectly when first used or connected, without reconfiguration or adjustment by the user."
 
-The Evolution: Plug n dont Play me (PndPm)
-Plug n dont Play me is a critical security and hygiene upgrade to the modern PnP paradigm. Its foundational axiom is strict: Software may install, but it must not play in the background without explicit, audited administrative validation. By utilizing the compiled AutoHotkey binary (PndPm.exe), the system transitions from a passive host into a rigid sentinel—freezing, auditing, and enforcing baseline compliance against unauthorized modern software drift.
+The Modern Reality: 
 
-⚙️ Application Integration & Usage (PndPm.exe)
-The compiled AutoHotkey binary (PndPm.exe) consumes the dataset hosted here to audit the host machine's system health.
+In today's computing ecosystem, this hands-off automation has been structurally twisted.
+"Working perfectly without user intervention" has devolved into silent background service inflation, 
+unvetted telemetry nodes, aggressive third-party updater daemons, and permanent administrative configuration drift.
+Modern software abuses the PnP philosophy to silently "play" with system privileges, bloated registries, and background 
+execution lines without explicit user consent.
 
-Ingestion Flow
-Bootstrap Update: On demand or during initialization, PndPm.exe performs an asynchronous HTTP GET request to pull the latest flat database file from the optimized distribution layer.
+## ⚙️ About this repo:
+The application maps the active startup states against the pristine configurations defined in native_base.map.
+When implementing a feature to disable non-PPL services—thereby exposing various behaviors of the current PnP stack—it is essential to follow 
+industry best practices to avoid catching users off guard and to mitigate the risk of catastrophic failures. 
+Since there is no persistent record of each service's default state (other than the official installation of a specific Windows 11 version), 
+maintaining a table to revert services to their default state is necessary.
 
-Agnostic Normalization: Windows dynamically appends random hexadecimal suffixes to per-user services (e.g., changing NPSMSvc into NPSMSvc_1768de on active sessions). Because these suffixes are stripped during this repository's ingestion phase, PndPm.exe executes a local Regex matching sequence (_[a-fA-F0-9]+$) to normalize active local service keys before cross-referencing.
+Source of extraction of this Master Data:
+"https://web.archive.org/web/20250918014956/https://www.winhelponline.com/blog/windows-11-default-services-configuration/"
 
-Delta Auditing: The application maps the active startup states against the pristine configurations defined in native_base.map to detect unauthorized drift, unexpected privilege escalations, or disabled critical security flags.
-
-🚀 Optimized Distribution Layer
-To ensure ultra-low latency execution and eliminate nested routing overhead when the client application downloads updates from the cloud, the database flat-file is delivered through an optimized single-tier storage layer located directly at the repository root.
-
-Production applications (PndPm.exe) can stream the immutable asset directly from the public CDN endpoint:
+The production application (PndPm.exe) must ingest the immutable table directly from the public CDN endpoint, 
+using the default service configuration as a baseline for any runtime changes. This data staging component remains cloud-resident, 
+adhering to industry best practices by consuming a validated engineering table from a trusted source:
 https://raw.githubusercontent.com/danbussoni/plug-n-dont-play-me-raw-data/main/native_base.map
 
-📊 Native Taxonomy Specification
-The ledger is persisted within a flat pipe-delimited (|) file system to prevent syntax collisions with Windows execution flags, directory structures, and Security Descriptor Definition Language (SDDL) strings. Normalization, string cleansing, and type-casting are decoupled from this storage tier and handled natively downstream by the application logic.
+## 📊 Native Taxonomy Specification
+
+The ledger is persisted within a flat pipe-delimited (|) file system to prevent syntax collisions.
+Normalization, string cleansing, and type-casting are decoupled from this storage tier and handled natively downstream by the application logic.
+Agnostic Normalization: Windows dynamically appends random hexadecimal suffixes to per-user services (e.g., changing NPSMSvc into NPSMSvc_1768de on active sessions).
+These suffixes are stripped during this repository's ingestion phase for cross-referencing.
 
 ;ServiceName|DisplayName|ImagePath|StartupType|LogOnAs|Permissions
 
@@ -52,4 +58,5 @@ StartupType: The native textual startup behavior token (e.g., Manual (Triggered)
 LogOnAs: The security principal identity context assigned to run the thread (e.g., LocalSystem, NT AUTHORITY\LocalService).
 
 Permissions: The raw Security Descriptor Definition Language sequence governing access rights, security identifiers (SIDs), DACLs, and SACLs.
+ 
 
