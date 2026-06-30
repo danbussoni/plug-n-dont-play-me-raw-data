@@ -50,7 +50,7 @@ header = (
 # ARCHITECTURE LAYER: Dynamically resolve repository root to enforce flat root CDN delivery
 script_dir = os.path.dirname(os.path.abspath(__file__))
 repo_root = os.path.dirname(script_dir)
-output_path = os.path.join(repo_root, "native_base.map")
+output_path = os.path.join(repo_root, "win_default_services_config.map")
 
 # Populate the final flat database with cleaned names directly at the root
 with open(output_path, "w", encoding="utf-8") as f:
