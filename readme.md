@@ -1,4 +1,4 @@
-# Plug n dont Play me — Raw Master Data (win_default_services_config.map)
+# Plug-n-Don't-Play me — Raw Master Data (win_default_services_config.map)
 
 An immutable, high-fidelity local Data Lake preserving the absolute factory-default configuration states of Windows 11 services. 
 This repository serves as the centralized backend data pipeline for the **Plug n dont Play me** client application.
